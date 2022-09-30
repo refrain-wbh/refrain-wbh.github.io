@@ -1,0 +1,773 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="流雨溪">
+  <meta name="keywords" content="哲学, 计算机, AI">
+  
+    <meta name="description" content="第一章 你好，C++的并发世界进程并发的优点：  依赖于操作系统提供的通信手段，可以有效地保护进程不被其他进程访问和修改，操作系统提供了保护操作和更高级别的通信机制。 可以实现不同主机之间的并发（网络通信）  进程并发的缺点：  进程占用资源更多，启动更慢，通信手段复杂或者低效。 C++没有提供对多进程的支持，依赖操作系统，不方便跨平台  线程并发的优点：  内存共享，方便地进行通信 资源消耗小，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《C++ Concurrency in Action - SECOND EDITION》笔记">
+<meta property="og:url" content="https://refrain-wbh.github.io/2022/09/17/%E3%80%8AC-Concurrency-in-Action-SECOND-EDITION%E3%80%8B%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="流雨溪">
+<meta property="og:description" content="第一章 你好，C++的并发世界进程并发的优点：  依赖于操作系统提供的通信手段，可以有效地保护进程不被其他进程访问和修改，操作系统提供了保护操作和更高级别的通信机制。 可以实现不同主机之间的并发（网络通信）  进程并发的缺点：  进程占用资源更多，启动更慢，通信手段复杂或者低效。 C++没有提供对多进程的支持，依赖操作系统，不方便跨平台  线程并发的优点：  内存共享，方便地进行通信 资源消耗小，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://refrain-wbh.github.io/2022/09/17/%E3%80%8AC-Concurrency-in-Action-SECOND-EDITION%E3%80%8B%E7%AC%94%E8%AE%B0/1663417852421.png">
+<meta property="og:image" content="https://refrain-wbh.github.io/2022/09/17/%E3%80%8AC-Concurrency-in-Action-SECOND-EDITION%E3%80%8B%E7%AC%94%E8%AE%B0/1663418181574.png">
+<meta property="og:image" content="https://refrain-wbh.github.io/2022/09/17/%E3%80%8AC-Concurrency-in-Action-SECOND-EDITION%E3%80%8B%E7%AC%94%E8%AE%B0/1663419089589.png">
+<meta property="article:published_time" content="2022-09-17T03:24:11.000Z">
+<meta property="article:modified_time" content="2022-09-18T03:17:51.232Z">
+<meta property="article:author" content="流雨溪">
+<meta property="article:tag" content="多线程">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://refrain-wbh.github.io/2022/09/17/%E3%80%8AC-Concurrency-in-Action-SECOND-EDITION%E3%80%8B%E7%AC%94%E8%AE%B0/1663417852421.png">
+  
+  
+  
+  <title>《C++ Concurrency in Action - SECOND EDITION》笔记 - 流雨溪</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"refrain-wbh.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"t1hzgQLCgQPXkNQl2G50QRMv-MdYXbMMI","app_key":"sw8LyQLQZXex7bb1gNJwtvqu","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>流雨溪</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="《C++ Concurrency in Action - SECOND EDITION》笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-17 11:24" pubdate>
+          2022年9月17日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          35 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">《C++ Concurrency in Action - SECOND EDITION》笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第一章-你好，C-的并发世界"><a href="#第一章-你好，C-的并发世界" class="headerlink" title="第一章 你好，C++的并发世界"></a>第一章 你好，C++的并发世界</h1><p>进程并发的优点：</p>
+<ul>
+<li>依赖于操作系统提供的通信手段，可以有效地保护进程不被其他进程访问和修改，操作系统提供了保护操作和更高级别的通信机制。</li>
+<li>可以实现不同主机之间的并发（网络通信）</li>
+</ul>
+<p>进程并发的缺点：</p>
+<ul>
+<li>进程占用资源更多，启动更慢，通信手段复杂或者低效。</li>
+<li>C++没有提供对多进程的支持，依赖操作系统，不方便跨平台</li>
+</ul>
+<p>线程并发的优点：</p>
+<ul>
+<li>内存共享，方便地进行通信</li>
+<li>资源消耗小，启动更快</li>
+<li>c++支持，所以可以编写跨平台代码</li>
+</ul>
+<p>线程并发的缺点：</p>
+<ul>
+<li>线程的共享管理更复杂，需要良好的维护</li>
+<li>无法跨主机</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">std::thread <span class="hljs-title">my_thread</span><span class="hljs-params">(background_task())</span></span>;<br></code></pre></td></tr></table></figure>
+
+<p>注意这个语法可能会被解析成为函数声明，因此可以用my_thread{backgroud_task())}等。被称为最令人头痛的语法解析</p>
+<p>注意一旦声明了一个线程，就必须要在thread被销毁之前决定是join还是detach。否则的话当thread被销毁的时候会调用terminal 杀死<strong>进程</strong>。注意杀死的不是什么别的东西，杀死的是进程本身。所以主线程和子线程都死了！</p>
+<p>而且注意到一个很奇怪的事实就是，如果main函数退出的话，所有线程也被杀死了。看起来main函数退出是进程退出，资源回收（<strong>进程是资源分配的单位，线程也是资源</strong>），所以所有的线程也要退出。</p>
+<p>join 加入，等到线程完成之后再退出。要注意如果主线程异常的话，join会被跳过。</p>
+<p>下面的一些代码展示如何避免这个问题，就是捕捉异常之后要及时地决定线程join或者detach。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">func</span>; <span class="hljs-comment">// 定义在清单2.1中</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">f</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-type">int</span> some_local_state=<span class="hljs-number">0</span>;<br>  <span class="hljs-function">func <span class="hljs-title">my_func</span><span class="hljs-params">(some_local_state)</span></span>;<br>  <span class="hljs-function">std::thread <span class="hljs-title">t</span><span class="hljs-params">(my_func)</span></span>;<br>  <span class="hljs-keyword">try</span><br>  &#123;<br>    <span class="hljs-built_in">do_something_in_current_thread</span>();<br>  &#125;<br>  <span class="hljs-built_in">catch</span>(...)<br>  &#123;<br>    t.<span class="hljs-built_in">join</span>();  <span class="hljs-comment">// 1</span><br>    <span class="hljs-keyword">throw</span>;<br>  &#125;<br>  t.<span class="hljs-built_in">join</span>();  <span class="hljs-comment">// 2</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>根据异常之后会自动进行析构函数销毁变量，可以重定义thread，让他在析构的时候首先join。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">thread_guard</span><br>&#123;<br>  std::thread&amp; t;<br><span class="hljs-keyword">public</span>:<br>  <span class="hljs-function"><span class="hljs-keyword">explicit</span> <span class="hljs-title">thread_guard</span><span class="hljs-params">(std::thread&amp; t_)</span>:</span><br><span class="hljs-function">    t(t_)</span><br><span class="hljs-function">  &#123;</span>&#125;<br>  ~<span class="hljs-built_in">thread_guard</span>()<br>  &#123;<br>    <span class="hljs-keyword">if</span>(t.<span class="hljs-built_in">joinable</span>()) <span class="hljs-comment">// 1</span><br>    &#123;<br>      t.<span class="hljs-built_in">join</span>();      <span class="hljs-comment">// 2</span><br>    &#125;<br>  &#125;<br>  <span class="hljs-built_in">thread_guard</span>(thread_guard <span class="hljs-type">const</span>&amp;)=<span class="hljs-keyword">delete</span>;   <span class="hljs-comment">// 3 禁止拷贝或者赋值，是很危险的</span><br>  thread_guard&amp; <span class="hljs-keyword">operator</span>=(thread_guard <span class="hljs-type">const</span>&amp;)=<span class="hljs-keyword">delete</span>;<br>&#125;;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">func</span>; <span class="hljs-comment">// 定义在清单2.1中</span><br><br><span class="hljs-built_in">voidf</span>()<br>&#123;<br>  <span class="hljs-type">int</span> some_local_state=<span class="hljs-number">0</span>;<br>  <span class="hljs-function">func <span class="hljs-title">my_func</span><span class="hljs-params">(some_local_state)</span></span>;<br>  <span class="hljs-function">std::thread <span class="hljs-title">t</span><span class="hljs-params">(my_func)</span></span>;<br>  <span class="hljs-function">thread_guard <span class="hljs-title">g</span><span class="hljs-params">(t)</span></span>;<br>  <span class="hljs-built_in">do_something_in_current_thread</span>();<br>&#125;    <span class="hljs-comment">// 4</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>detach，分离，一个thread对象调用detach，表示把线程和这个对象分离开，主要是让线程在后台运行。thread被销毁不会影响到他了。注意线程如果引用了临时变量，那么当主线程销毁的时候，该临时变量也可能变得未定义了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">func</span><br>&#123;<br>  <span class="hljs-type">int</span>&amp; i;<br>  <span class="hljs-built_in">func</span>(<span class="hljs-type">int</span>&amp; i_) : <span class="hljs-built_in">i</span>(i_) &#123;&#125;<br>  <span class="hljs-built_in">voidoperator</span>()()<br>  &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">unsigned</span> j=<span class="hljs-number">0</span> ; j&lt;<span class="hljs-number">1000000</span> ; ++j)<br>    &#123;<br>      <span class="hljs-built_in">do_something</span>(i);           <span class="hljs-comment">// 1 潜在访问隐患：悬空引用</span><br>    &#125;<br>  &#125;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">oops</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-type">int</span> some_local_state=<span class="hljs-number">0</span>;<br>  <span class="hljs-function">func <span class="hljs-title">my_func</span><span class="hljs-params">(some_local_state)</span></span>;<br>  <span class="hljs-function">std::thread <span class="hljs-title">my_thread</span><span class="hljs-params">(my_func)</span></span>;<br>  my_thread.<span class="hljs-built_in">detach</span>();          <span class="hljs-comment">// 2 不等待线程结束</span><br>&#125;                              <span class="hljs-comment">// 3 新线程可能还在运行</span><br></code></pre></td></tr></table></figure>
+
+<p>注意看上面这段代码，some_local_state是局部变量，并且直接被my_func使用。当采用detach策略，那么当oops运行完毕的时候，这个变量就会销毁，从而my_func访问了未定义变量。</p>
+<p>【引用的底层实现机制，为什么std::ref()能够提供引用，为什么thread传参需要复制而非引用（可能是无视函数的需求）】</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">X</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">do_lengthy_work</span><span class="hljs-params">()</span></span>;<br>&#125;;<br>X my_x;<br><span class="hljs-function">std::thread <span class="hljs-title">t</span><span class="hljs-params">(&amp;X::do_lengthy_work,&amp;my_x)</span></span>; <span class="hljs-comment">// 1</span><br></code></pre></td></tr></table></figure>
+
+<p>注意看这段文字的初始化方法，第一个参数实际上不是对象的函数，而是类的函数，而第二个参数提供了对象的起始地址，这个方法应该等价于t(my_x.do_lengthy_work))</p>
+<p>线程可以移动，但不能复制，所以同一时间线程只能和一个thread关联，但可以在不同thread之间移动。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">some_function</span><span class="hljs-params">()</span></span>;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">some_other_function</span><span class="hljs-params">()</span></span>;<br><span class="hljs-function">std::thread <span class="hljs-title">t1</span><span class="hljs-params">(some_function)</span></span>;            <span class="hljs-comment">// 1</span><br>std::thread t2=std::<span class="hljs-built_in">move</span>(t1);            <span class="hljs-comment">// 2</span><br>t1=std::<span class="hljs-built_in">thread</span>(some_other_function);    <span class="hljs-comment">// 3</span><br>std::thread t3;                            <span class="hljs-comment">// 4</span><br>t3=std::<span class="hljs-built_in">move</span>(t2);                        <span class="hljs-comment">// 5</span><br>t1=std::<span class="hljs-built_in">move</span>(t3);                        <span class="hljs-comment">// 6 赋值操作将使程序崩溃</span><br></code></pre></td></tr></table></figure>
+
+<p>看上面这段例子，t2初始化的对象是t1，t1作为thread可移动但不能复制。所以如果直接用&#x3D;则是复制操作会崩溃。而3位置是可以的，因为右边是临时对象，移动操作将会隐式的调用。就是移动赋值。</p>
+<p>t3可以直接赋值，但是t1不行，因为t1有线程，所以直接调用terminal终止了进程。不能通过赋值的方式丢弃进程，只能detach，或者join等待线程完成，然后t1才能空下来，这个时候就可以赋值了。</p>
+<p><code>【std::thread</code>对象的容器，如果这个容器是移动敏感的(比如，标准中的 <code>std::vector&lt;&gt;</code>)，那么移动操作同样适用于这些容器。】</p>
+<p>标识符是std::thread::id类型，注意不同于int，尽管cout可以输出int。可以拷贝和对比，因为可以复用。</p>
+<h1 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h1><p>当其中一个成员函数返回的是保护数据的指针或引用时，会破坏数据。具有访问能力的指针或引用可以访问(并可能修改)被保护的数据，而不会被互斥锁限制。这就需要对接口有相当谨慎的设计，要确保互斥量能锁住数据的访问，并且不留后门。</p>
+<p>接口之间可能存在竞争的关系，所谓接口就是开放给外部访问的数据？</p>
+<p>比如，一个stack，size() empty 的返回结果是没问题的，但是是不可靠的，因为可能存在有其他竞争在其返回后访问stack。</p>
+<p>一些重要的类含义记录：</p>
+<p>lock_guard：这个类就是对某个互斥量的上锁， 同时在该对象被销毁的时候解锁。</p>
+<p>unique_lock：这个类就是lock_guard的加强版，可以加第二个参数，要不要上锁。因为可以调用lock()函数统一上锁。这个函数需要参数都有lock() unlock() try_lock()三个参数。</p>
+<p>shared_ptr：就是对某块堆上的数据进行智能的监控，当引用为0的时候自动销毁。比如说</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">shared_ptr&lt;<span class="hljs-type">int</span>&gt; p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>();<br></code></pre></td></tr></table></figure>
+
+<p>对于这样的一句话，根据下图所示，首先调用new，生成了widget，然后shared_ptr会生成控制块也就是中间的，包括指针，被引用的次数等。</p>
+<img src="/2022/09/17/%E3%80%8AC-Concurrency-in-Action-SECOND-EDITION%E3%80%8B%E7%AC%94%E8%AE%B0/1663417852421.png" srcset="/img/loading.gif" lazyload class="" width="1663417852421">
+
+<p>但是shared_ptrs都是强引用的，那么会有循环引用的问题：</p>
+<img src="/2022/09/17/%E3%80%8AC-Concurrency-in-Action-SECOND-EDITION%E3%80%8B%E7%AC%94%E8%AE%B0/1663418181574.png" srcset="/img/loading.gif" lazyload class="" width="1663418181574">比如说这个图中，当我退出程序了，那么Sp1和Sp2都被销毁了，这没啥问题，但是问题是他们指向的对象不会被销毁，因为他们互相引用。需要用weak_ptr在节点内部的指针。
+
+
+<p>make_shared：这个是专门用来制作shared_ptr的，但是不同于上文中shared_ptr p &#x3D; new int()，这里会发生两次alloc。通过make_shared可以将其减少为1次。</p>
+<p>比如说make_shared (move(0))这样，会在分配内存的时候，将控制块和数据内容分配在一起。</p>
+<img src="/2022/09/17/%E3%80%8AC-Concurrency-in-Action-SECOND-EDITION%E3%80%8B%E7%AC%94%E8%AE%B0/1663419089589.png" srcset="/img/loading.gif" lazyload class="" width="1663419089589">
+
+<p>所以实质上所谓的shared_ptr不过是个伪指针罢了。make_shared的好处在于，减少一次alloc开销，而这对性能提升是很大的，其次，占的内存更小，因为减少了大小跟踪的分配器开销，还有增强了数据的局部性，这两个块很可能是在同一个页面或者同一缓冲行。但是带来的问题就在于，由于这两个块分配在了一起，所以必须要等到weak_ptr被释放之后，那一整个块才能被释放（因为make_shared生成的是一整个块）。但是如果是两次分配的话，强指针为0的时候，对应的数据块就被释放了，等到弱指针释放之后，控制块被释放。</p>
+<p>wait函数详解</p>
+<p>这个函数支持一个锁和一个函数为参数。首先会调用这个函数，如果是true，那么就继续执行，如果是false，那么会释放前面的锁，注意，这个锁在传入的时候应该是锁上的。释放之后，进入睡眠状态（为什么要释放呢？因为往往是因为没有东西可以消费，所以阻塞在这里，要释放锁让其他线程从事生产）等到notice_one的时候，再唤醒，然后加锁，然后调用函数，重复上述过程。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="category-chain-item">计算机</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">#多线程</a>
+      
+        <a href="/tags/C/">#C++</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>《C++ Concurrency in Action - SECOND EDITION》笔记</div>
+      <div>https://refrain-wbh.github.io/2022/09/17/《C-Concurrency-in-Action-SECOND-EDITION》笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>流雨溪</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月17日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/30/2022%E5%B9%B4%E4%BF%9D%E7%A0%94%E6%80%BB%E7%BB%93/" title="2022年保研总结">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2022年保研总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/10/redis-%E8%AF%A6%E8%A7%A3/" title="redis 详解">
+                        <span class="hidden-mobile">redis 详解</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"t1hzgQLCgQPXkNQl2G50QRMv-MdYXbMMI","appKey":"sw8LyQLQZXex7bb1gNJwtvqu","path":"window.location.pathname","placeholder":"说点啥","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         次
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
