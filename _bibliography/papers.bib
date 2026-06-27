@@ -1,0 +1,211 @@
+---
+---
+
+@string{aps = {American Physical Society,}}
+
+@techreport{wang2026verification,
+  abbr        = {Tech Report},
+  bibtex_show = {true},
+  title       = {The Verification Horizon: No Silver Bullet for Coding Agent Rewards},
+  author      = {Binghai Wang and Chenlong Zhang and Dayiheng Liu and Jiajun Zhang and Jiawei Chen and Mouxiang Chen and Rongyao Fang and Siyuan Zhang and Xuwu Wang and Yuheng Jing and Zeyao Ma and Zeyu Cui},
+  journal     = {arXiv preprint arXiv:2606.26300},
+  year        = {2026},
+  month       = {6},
+  arxiv       = {2606.26300},
+  doi         = {10.48550/arXiv.2606.26300},
+  website     = {/papers/verification-horizon/},
+  note        = {Qwen Team Technical Report},
+  tldr        = {Verification, not generation, has become the real bottleneck for coding agents—so reward systems must co-evolve with the policy they supervise.},
+  abstract    = {A classical intuition holds that verifying a solution is easier than producing one. For today's coding agents, this intuition is being inverted: generating complex candidate solutions is no longer difficult---reliably verifying them has become the harder problem. Every verifier we can build is only a proxy for human intent, never the intent itself. We characterize the quality of verification signals along three dimensions---scalability, faithfulness, and robustness---and study four reward constructions: a test verifier for general coding tasks, a rubric verifier for frontend tasks, the user as verifier for real-world agent tasks, and an automated agent verifier for long-horizon tasks. No fixed reward function can remain effective as policy capability continues to grow; verification must co-evolve with the generator.},
+  selected    = {true}
+}
+
+@inproceedings{xi2026agentprm,
+  abbr        = {WWW'26},
+  bibtex_show = {true},
+  title       = {AgentPRM: Process Reward Models for LLM Agents via Step-Wise Promise and Progress},
+  author      = {Zhiheng Xi and Chenyang Liao and Guanyu Li and Zhihao Zhang and Wenxiang Chen and Binghai Wang and Senjie Jin and Yuhao Zhou and Jian Guan and Wei Wu and Tao Ji and Tao Gui and Qi Zhang and Xuanjing Huang},
+  booktitle   = {Proceedings of the ACM Web Conference (WWW)},
+  year        = {2026},
+  month       = {6},
+  arxiv       = {2511.08325},
+  doi         = {10.1145/3774904.3792551},
+  citations   = {35},
+  tldr        = {Process reward models that score each agent step by its "promise" and "progress", improving long-horizon LLM-agent decision-making.},
+  abstract    = {We introduce AgentPRM, a process reward model that supervises LLM agents at the step level. Rather than only rewarding final outcomes, AgentPRM scores intermediate steps by their promise (expected future usefulness) and progress (concrete advancement toward the goal), yielding denser and more informative training signals for long-horizon agentic tasks.}
+}
+
+@article{pan2026evpo,
+  abbr        = {arXiv'26},
+  bibtex_show = {true},
+  title       = {EVPO: Explained Variance Policy Optimization for Adaptive Critic Utilization in LLM Post-Training},
+  author      = {Chengjun Pan and Shichun Liu and Jiahang Lin and Dingwei Zhu and Jiazheng Zhang and Shihan Dou and Songyang Gao and Zhenhua Han and Binghai Wang and Rui Zheng and Xuanjing Huang and Tao Gui and Yansong Feng},
+  journal     = {arXiv preprint arXiv:2604.19485},
+  year        = {2026},
+  month       = {4},
+  arxiv       = {2604.19485},
+  doi         = {10.48550/arXiv.2604.19485},
+  tldr        = {Uses explained variance to adaptively decide how much to trust the critic, stabilizing and accelerating LLM post-training.},
+  abstract    = {EVPO introduces explained-variance policy optimization, which adaptively modulates critic utilization during LLM post-training. By measuring how much variance the critic actually explains, EVPO down-weights an unreliable critic and leans on it when trustworthy, improving training stability and sample efficiency.}
+}
+
+@article{lin2026mmdocr1,
+  abbr        = {arXiv'26},
+  bibtex_show = {true},
+  title       = {MM-Doc-R1: Training Agents for Long Document Visual Question Answering through Multi-turn Reinforcement Learning},
+  author      = {Jiahang Lin and Kai Hu and Binghai Wang and Yuhao Zhou and Zhiheng Xi and Honglin Guo and Shichun Liu and Junzhe Wang and Shihan Dou and Enyu Zhou and Hang Yan and Zhenhua Han and Tao Gui and Qi Zhang and Xuanjing Huang},
+  journal     = {arXiv preprint arXiv:2604.13579},
+  year        = {2026},
+  month       = {4},
+  arxiv       = {2604.13579},
+  doi         = {10.48550/arXiv.2604.13579},
+  citations   = {2},
+  tldr        = {Multi-turn RL trains agents to answer long-document visual questions by iteratively gathering and reasoning over evidence.},
+  abstract    = {MM-Doc-R1 trains multimodal agents for visual question answering over long documents. Through multi-turn reinforcement learning, the agent learns to navigate documents, gather evidence across pages, and reason iteratively, outperforming single-pass baselines on long-document VQA.}
+}
+
+@article{wang2026hopchain,
+  abbr        = {arXiv'26},
+  bibtex_show = {true},
+  title       = {HopChain: Multi-Hop Data Synthesis for Generalizable Vision-Language Reasoning},
+  author      = {Shenzhi Wang and Shixuan Liu and Jingren Zhou and Chang Gao and Xiong-Hui Chen and Binghai Wang and An Yang and Shiji Song and Bowen Yu and Gao Huang and Junyang Lin},
+  journal     = {arXiv preprint arXiv:2603.17024},
+  year        = {2026},
+  month       = {3},
+  arxiv       = {2603.17024},
+  doi         = {10.48550/arXiv.2603.17024},
+  citations   = {1},
+  tldr        = {Synthesizing multi-hop training data yields vision-language models that generalize to harder compositional reasoning.},
+  abstract    = {HopChain proposes a multi-hop data synthesis pipeline for vision-language reasoning. By constructing chains of intermediate reasoning hops, it produces training data that improves the generalization of vision-language models on compositional, multi-step reasoning tasks.}
+}
+
+@inproceedings{wang2026outcome,
+  abbr        = {ACL'26},
+  bibtex_show = {true},
+  title       = {Outcome Accuracy is Not Enough: Aligning the Reasoning Process of Reward Models},
+  author      = {Binghai Wang and Yantao Liu and Yuxuan Liu and Tianyi Tang and Shenzhi Wang and Chang Gao and Chujie Zheng and Yichang Zhang and Le Yu and Shixuan Liu and Tao Gui and Qi Zhang and Xuanjing Huang and Bowen Yu and Fei Huang and Junyang Lin},
+  booktitle   = {Annual Meeting of the Association for Computational Linguistics (ACL)},
+  year        = {2026},
+  month       = {2},
+  arxiv       = {2602.04649},
+  doi         = {10.48550/arXiv.2602.04649},
+  citations   = {8},
+  tldr        = {Reward models can be right for the wrong reasons; aligning their reasoning process—not just outcomes—escapes this deceptive alignment.},
+  abstract    = {Generative Reward Models (GenRMs) and LLM-as-a-Judge exhibit deceptive alignment by producing correct judgments for incorrect reasons. We introduce Rationale Consistency, a fine-grained metric that quantifies the alignment between the model's reasoning process and human judgment, and a hybrid training signal that combines rationale consistency with outcome accuracy. Our method achieves state-of-the-art performance on RM-Bench (87.1%) and JudgeBench (82%), and improves downstream RLHF, escaping the deceptive alignment trap.},
+  selected    = {true}
+}
+
+@article{wang2025worldpm,
+  abbr        = {arXiv'25},
+  bibtex_show = {true},
+  title       = {WorldPM: Scaling Human Preference Modeling},
+  author      = {Binghai Wang and Runji Lin and Keming Lu and Le Yu and Zhenru Zhang and Fei Huang and Chujie Zheng and Kai Dang and Yang Fan and Xingzhang Ren and An Yang and Binyuan Hui and Dayiheng Liu and Tao Gui and Qi Zhang and Xuanjing Huang and Yu-Gang Jiang and Bowen Yu and Jingren Zhou and Junyang Lin},
+  journal     = {arXiv preprint arXiv:2505.10527},
+  year        = {2025},
+  month       = {5},
+  arxiv       = {2505.10527},
+  doi         = {10.48550/arXiv.2505.10527},
+  citations   = {11},
+  tldr        = {Human preference modeling follows scaling laws—objective preferences scale with data and model size, while subjective ones do not. <strong>Adopted in the post-training of Qwen3.</strong>},
+  abstract    = {Motivated by scaling laws in language modeling, we find that similar laws exist in preference modeling. We propose World Preference Modeling (WorldPM), training on 15M-scale data across models from 1.5B to 72B parameters. Adversarial and objective metrics scale with data and model size, while subjective metrics do not. WorldPM broadly improves generalization across preference datasets and, integrated into RLHF, yields notable gains on in-house and public evaluations.},
+  selected    = {true}
+}
+
+@techreport{qwen2025qwen3,
+  abbr        = {Tech Report},
+  bibtex_show = {true},
+  title       = {Qwen3 Technical Report},
+  author      = {Qwen Team},
+  journal     = {arXiv preprint arXiv:2505.09388},
+  year        = {2025},
+  month       = {5},
+  arxiv       = {2505.09388},
+  doi         = {10.48550/arXiv.2505.09388},
+  tldr        = {The Qwen3 family of open foundation models, unifying thinking and non-thinking modes with strong reasoning, multilingual, and agentic capabilities.},
+  abstract    = {Qwen3 is a series of open-weight large language models spanning a wide range of sizes, including both dense and Mixture-of-Experts architectures. A key feature is the integration of thinking (for complex multi-step reasoning) and non-thinking (for fast, context-driven responses) modes within a single model, together with a thinking-budget mechanism. Qwen3 delivers state-of-the-art results among open models across reasoning, code, math, multilingual, and agentic benchmarks.}
+}
+
+@inproceedings{zhou2025rmb,
+  abbr        = {ICLR'25},
+  bibtex_show = {true},
+  title       = {RMB: Comprehensively Benchmarking Reward Models in LLM Alignment},
+  author      = {Enyu Zhou and Guodong Zheng and Binghai Wang and Zhiheng Xi and Shihan Dou and Rong Bao and Wei Shen and Limao Xiong and Jessica Fan and Yurong Mou and Rui Zheng and Tao Gui and Qi Zhang and Xuanjing Huang},
+  booktitle   = {International Conference on Learning Representations (ICLR)},
+  year        = {2025},
+  month       = {4},
+  arxiv       = {2410.09893},
+  doi         = {10.48550/arXiv.2410.09893},
+  html        = {https://openreview.net/forum?id=kmgrlG9TR0},
+  citations   = {57},
+  tldr        = {A comprehensive 49-scenario reward-model benchmark that correlates with downstream alignment and exposes generalization gaps in state-of-the-art RMs.},
+  abstract    = {Reward models (RMs) guide the alignment of large language models. We propose RMB, a comprehensive RM benchmark covering over 49 real-world scenarios with both pairwise and Best-of-N (BoN) evaluations, and demonstrate a positive correlation with downstream alignment performance. Our analysis reveals generalization defects of state-of-the-art RMs and highlights the potential of generative RMs.}
+}
+
+@inproceedings{wang2024reward,
+  abbr        = {EMNLP'24},
+  bibtex_show = {true},
+  title       = {Reward Modeling Requires Automatic Adjustment Based on Data Quality},
+  author      = {Binghai Wang and Rui Zheng and Lu Chen and Zhiheng Xi and Wei Shen and Yuhao Zhou and Dong Yan and Tao Gui and Qi Zhang and Xuanjing Huang},
+  booktitle   = {Findings of the Association for Computational Linguistics: EMNLP 2024},
+  year        = {2024},
+  month       = {11},
+  pages       = {4041--4064},
+  publisher   = {Association for Computational Linguistics},
+  address     = {Miami, Florida, USA},
+  doi         = {10.18653/v1/2024.findings-emnlp.234},
+  html        = {https://aclanthology.org/2024.findings-emnlp.234/},
+  pdf         = {https://aclanthology.org/2024.findings-emnlp.234.pdf},
+  citations   = {15},
+  tldr        = {The score gap a reward model assigns reveals preference-data quality, enabling automatic reweighting that stabilizes RM training under noisy labels.},
+  abstract    = {In Reinforcement Learning from Human Feedback (RLHF), the reward model plays a crucial role in aligning language model outputs with human values. The human preference data used to train the reward model consists of a prompt and a response pair, with humans annotating which response better aligns with human value preferences. Due to the complexity and subjectivity of the annotation task, multiple organizations including OpenAI and Anthropic report significant noise in the human preference datasets, leading to instability and deviation in reward model training from human values. We discover that the difference in scores assigned to response pairs by the reward model effectively indicates the quality of data, and data of varying qualities show significant distinctions in reward model training. We introduce a method that automatically adjusts reward modeling based on data quality, reducing the impact of noise and making full use of dataset. Experiments on multiple human preference datasets demonstrate that our method stabilizes reward model training and significantly enhances the alignment performance of RLHF.}
+}
+
+@inproceedings{chen2024improving,
+  abbr        = {EMNLP'24},
+  bibtex_show = {true},
+  title       = {Improving Discriminative Capability of Reward Models in RLHF Using Contrastive Learning},
+  author      = {Lu Chen and Rui Zheng and Binghai Wang and Senjie Jin and Caishuang Huang and Junjie Ye and Zhihao Zhang and Yuhao Zhou and Zhiheng Xi and Tao Gui and Qi Zhang and Xuanjing Huang},
+  booktitle   = {Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  year        = {2024},
+  month       = {11},
+  pages       = {15270--15283},
+  publisher   = {Association for Computational Linguistics},
+  address     = {Miami, Florida, USA},
+  doi         = {10.18653/v1/2024.emnlp-main.852},
+  html        = {https://aclanthology.org/2024.emnlp-main.852/},
+  pdf         = {https://aclanthology.org/2024.emnlp-main.852.pdf},
+  citations   = {5},
+  tldr        = {Contrastive learning sharpens a reward model's ability to discriminate between subtly different responses, improving RLHF.},
+  abstract    = {Reward models in RLHF must reliably distinguish between responses of differing quality. We introduce a contrastive learning objective that improves the discriminative capability of reward models, helping them separate subtly different responses and yielding better downstream alignment performance.}
+}
+
+@techreport{wang2024secrets,
+  abbr        = {Tech Report},
+  bibtex_show = {true},
+  title       = {Secrets of RLHF in Large Language Models Part II: Reward Modeling},
+  author      = {Binghai Wang and Rui Zheng and Lu Chen and Yan Liu and Shihan Dou and Caishuang Huang and Wei Shen and Senjie Jin and Enyu Zhou and Chenyu Shi and Songyang Gao and Nuo Xu and Yuhao Zhou and Xiaoran Fan and Zhiheng Xi and Jun Zhao and Xiao Wang and Tao Ji and Hang Yan and Lixing Shen and Zhan Chen and Tao Gui and Qi Zhang and Xipeng Qiu and Xuanjing Huang and Zuxuan Wu and Yu-Gang Jiang},
+  journal     = {arXiv preprint arXiv:2401.06080},
+  year        = {2024},
+  month       = {1},
+  arxiv       = {2401.06080},
+  doi         = {10.48550/arXiv.2401.06080},
+  citations   = {176},
+  tldr        = {A deep dive into reward modeling for RLHF: measuring preference strength and using contrastive/meta-learning for robust, iterative RLHF.},
+  abstract    = {Reward models are trained as proxies for human preferences to drive RLHF optimization. We address two challenges: (1) from a data perspective, we measure preference strength via a multi-RM voting mechanism and mitigate incorrect/ambiguous preferences; (2) from an algorithmic standpoint, we introduce contrastive learning and meta-learning to improve reward model generalization and support iterative RLHF.},
+  selected    = {true}
+}
+
+@techreport{zheng2023secrets,
+  abbr        = {Tech Report},
+  bibtex_show = {true},
+  title       = {Secrets of RLHF in Large Language Models Part I: PPO},
+  author      = {Rui Zheng and Shihan Dou and Songyang Gao and Yuan Hua and Wei Shen and Binghai Wang and Yan Liu and Senjie Jin and Qin Liu and Yuhao Zhou and Limao Xiong and Lu Chen and Zhiheng Xi and Nuo Xu and Wenbin Lai and Minghao Zhu and Cheng Chang and Zhangyue Yin and Rongxiang Weng and Wensen Cheng and Haoran Huang and Tianxiang Sun and Hang Yan and Tao Gui and Qi Zhang and Xipeng Qiu and Xuanjing Huang},
+  journal     = {arXiv preprint arXiv:2307.04964},
+  year        = {2023},
+  month       = {7},
+  arxiv       = {2307.04964},
+  doi         = {10.48550/arXiv.2307.04964},
+  citations   = {276},
+  tldr        = {A systematic dissection of PPO for RLHF, introducing PPO-max for markedly more stable LLM policy training.},
+  abstract    = {We dissect the framework of RLHF and re-evaluate the inner workings of PPO, identifying policy constraints as the key factor for effective PPO. We propose PPO-max, an advanced variant that substantially improves the training stability of the policy model, and release technical reports, reward models, and PPO code to support open research on LLM alignment.}
+}

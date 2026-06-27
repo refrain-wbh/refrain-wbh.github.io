@@ -1,0 +1,74 @@
+{% capture footer_contents %}
+  &copy; Copyright {{ site.time | date: '%Y' }}
+  {{ site.first_name }}
+  {{ site.middle_name }}
+  {{ site.last_name }}. {{ site.footer_text }}
+  {% if site.impressum_path %}
+    <a href="{{ site.url }}{{ site.baseurl }}{{ site.impressum_path }}">Impressum</a>.
+  {% endif %}
+  {% if site.last_updated %}
+    Last updated: {{ 'now' | date: '%B %d, %Y' }}.
+  {% endif %}
+{% endcapture %}
+
+{% if site.footer_fixed %}
+  <footer class="fixed-bottom" role="contentinfo">
+    <div class="container mt-0">
+      {{ footer_contents }}
+    </div>
+  </footer>
+{% else %}
+  <footer class="sticky-bottom mt-5" role="contentinfo">
+    {% if site.newsletter.enabled %}
+      {% if site.plugins contains 'al_newsletter' %}
+        {% include plugins/al_newsletter_form_center.liquid %}
+      {% else %}
+        {% include newsletter.liquid %}
+      {% endif %}
+    {% endif %}
+
+    <div class="container">
+      {{ footer_contents }}
+    </div>
+  </footer>
+{% endif %}
+
+{%- comment -%} Decorative ornaments — remove this whole block to disable. {%- endcomment -%}
+<div class="page-ornaments" aria-hidden="true">
+  <div class="ornament ornament--hanging">
+    <svg width="64" height="140" viewBox="0 0 64 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 0 V96" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      <ellipse cx="20" cy="34" rx="11" ry="4.8" transform="rotate(-32 20 34)" fill="currentColor" opacity="0.9"/>
+      <ellipse cx="44" cy="46" rx="11" ry="4.8" transform="rotate(32 44 46)" fill="currentColor" opacity="0.9"/>
+      <ellipse cx="20" cy="59" rx="9.5" ry="4.3" transform="rotate(-30 20 59)" fill="currentColor" opacity="0.9"/>
+      <ellipse cx="44" cy="71" rx="9.5" ry="4.3" transform="rotate(30 44 71)" fill="currentColor" opacity="0.9"/>
+      <ellipse cx="32" cy="90" rx="7" ry="3.4" fill="currentColor" opacity="0.9"/>
+      <circle cx="32" cy="107" r="5" fill="currentColor"/>
+      <path d="M32 112 V128" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.7"/>
+    </svg>
+  </div>
+  <div class="ornament ornament--corner ornament--corner-bl">
+    <svg width="190" height="190" viewBox="0 0 190 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 188 C 50 150, 78 110, 92 52" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <ellipse cx="46" cy="150" rx="17" ry="7" transform="rotate(28 46 150)" fill="currentColor"/>
+      <ellipse cx="70" cy="118" rx="17" ry="7" transform="rotate(40 70 118)" fill="currentColor"/>
+      <ellipse cx="30" cy="128" rx="14" ry="6" transform="rotate(-18 30 128)" fill="currentColor"/>
+      <ellipse cx="86" cy="84" rx="15" ry="6.2" transform="rotate(52 86 84)" fill="currentColor"/>
+      <ellipse cx="58" cy="92" rx="13" ry="5.4" transform="rotate(8 58 92)" fill="currentColor"/>
+      <ellipse cx="92" cy="50" rx="9" ry="4" transform="rotate(64 92 50)" fill="currentColor"/>
+    </svg>
+  </div>
+  <div class="ornament ornament--corner ornament--corner-tl">
+    <svg width="170" height="170" viewBox="0 0 190 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 188 C 50 150, 78 110, 92 52" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <ellipse cx="46" cy="150" rx="17" ry="7" transform="rotate(28 46 150)" fill="currentColor"/>
+      <ellipse cx="70" cy="118" rx="17" ry="7" transform="rotate(40 70 118)" fill="currentColor"/>
+      <ellipse cx="30" cy="128" rx="14" ry="6" transform="rotate(-18 30 128)" fill="currentColor"/>
+      <ellipse cx="86" cy="84" rx="15" ry="6.2" transform="rotate(52 86 84)" fill="currentColor"/>
+      <ellipse cx="58" cy="92" rx="13" ry="5.4" transform="rotate(8 58 92)" fill="currentColor"/>
+      <ellipse cx="92" cy="50" rx="9" ry="4" transform="rotate(64 92 50)" fill="currentColor"/>
+    </svg>
+  </div>
+  <div class="page-glow page-glow--1" aria-hidden="true"></div>
+  <div class="page-glow page-glow--2" aria-hidden="true"></div>
+</div>

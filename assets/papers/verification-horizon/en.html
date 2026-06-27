@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Verification Horizon: No Silver Bullet for Coding Agent Rewards</title>
+<style>
+  :root { --maxw: 880px; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.8; color: #1a1a1a; margin: 0; background: #fff; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 40px 24px 64px; }
+  h1 { font-size: 1.8rem; line-height: 1.4; margin: 0 0 8px; }
+  .note { color:#888; font-size:0.85rem; margin-bottom: 1.5em; }
+  .abstract { background: #f5f7fa; border-left: 4px solid #b35c38; padding: 16px 22px; border-radius: 4px; margin: 1.5em 0; }
+  .epigraph { color: #666; font-style: italic; text-align: center; margin: 1.5em 0 2em; }
+  .btns { margin: 1.6em 0; }
+  .btns a { display:inline-block; margin: 0 8px 8px 0; padding: 8px 16px; border:1px solid #ddd; border-radius:8px; color:#b35c38; text-decoration:none; font-weight:600; }
+  .btns a:hover { border-color:#b35c38; }
+  .hint { color:#888; font-size:0.9rem; margin-top:2em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>The Verification Horizon: No Silver Bullet for Coding Agent Rewards</h1>
+<div class="note">Binghai Wang et al. · Qwen Team Technical Report · arXiv:2606.26300</div>
+<p class="epigraph">"There is no silver bullet."<br>— Frederick P. Brooks, Jr., <em>No Silver Bullet: Essence and Accident in Software Engineering</em> (1986)</p>
+
+<div class="abstract">
+<strong>Abstract.</strong> A classical intuition holds that verifying a solution is easier than producing one. For today's coding agents, this intuition is being inverted: as foundation models develop stronger reasoning and engineering harnesses grow more sophisticated, generating complex candidate solutions is no longer difficult&mdash;reliably verifying them has become the harder problem. Every verifier we can build is only a proxy for human intent, never the intent itself. This creates a twofold difficulty: intent is inherently under-specified, so faithfully checking whether it is satisfied is extremely hard; and under optimization, the gap between proxy and intent widens, manifesting as reward hacking or signal saturation. We characterize the quality of verification signals along three dimensions&mdash;scalability, faithfulness, and robustness&mdash;and argue that achieving all three at once is the core challenge. Building on Qwen foundation models, we study four reward constructions: a test verifier for SWE-style tasks, a rubric verifier for frontend tasks, the user as verifier for real-world agent tasks, and an automated agent verifier for long-horizon tasks. Across task types and policy capability levels, targeted verification design suppresses reward hacking and improves task quality, yielding significant gains on internal and public benchmarks. No fixed reward function can remain effective as policy capability keeps growing; verification must co-evolve with the generator&mdash;a continually rebuilt reward system is the core infrastructure that turns raw capability growth into trustworthy capability growth.
+</div>
+
+<div class="btns">
+  <a href="https://arxiv.org/abs/2606.26300" target="_blank" rel="noopener">Read full paper on arXiv →</a>
+  <a href="https://arxiv.org/pdf/2606.26300" target="_blank" rel="noopener">PDF</a>
+</div>
+
+<p class="hint">A full, side-by-side English rendering of the body is available on arXiv. The detailed Chinese translation (full text, with figures and tables) is available via the 中文 tab.</p>
+</div>
+</body>
+</html>

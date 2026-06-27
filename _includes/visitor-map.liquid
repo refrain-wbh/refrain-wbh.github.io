@@ -1,0 +1,22 @@
+{%- comment -%}
+  Visitor map (ClustrMaps). Shows where visitors come from on a world map.
+  To enable: register your site at https://clustrmaps.com, copy the `d=` id
+  from the embed snippet, and set it in _config.yml:
+
+  clustrmaps:
+    enabled: true
+    id: YOUR_MAP_ID   # the value after d= in the ClustrMaps snippet
+{%- endcomment -%}
+{% if site.clustrmaps.enabled and site.clustrmaps.id %}
+  <div class="visitor-map">
+    <h2 class="home-section-title">Visitors</h2>
+    <p class="visitor-map-caption">Where readers of this site are dropping by from.</p>
+    <div class="visitor-map-embed">
+      <script
+        type="text/javascript"
+        id="clustrmaps"
+        src="//clustrmaps.com/map_v2.js?d={{ site.clustrmaps.id }}&cl=ffffff&w=a"
+      ></script>
+    </div>
+  </div>
+{% endif %}
