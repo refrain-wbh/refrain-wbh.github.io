@@ -23,7 +23,7 @@ latest_posts:
   enabled: false
 ---
 
-Hi, I'm **Binghai Wang** (汪冰海) — my given name *冰海* literally means "sea of ice," which is why I go by **Dismeer**, a German word meaning *frozen sea* (冰封之海). I'm a direct PhD student on the **combined Master–PhD track (硕博连读)** at the [Fudan University NLP Lab](https://nlp.fudan.edu.cn/), co-advised by **Prof. Xuanjing Huang** and **Prof. Tao Gui**, and I expect to graduate in **2028**. I received my B.Eng. in Computer Science and Technology from **Tongji University**.
+Hi, I'm **Binghai Wang** (汪冰海) — my given name *冰海* literally means "sea of ice," which is why I go by **Dismeer**, a German word meaning *frozen sea* (冰封之海). I'm a direct PhD student on the **combined Master–PhD track (硕博连读)** at the [Fudan University NLP Lab](https://nlp.fudan.edu.cn/), co-advised by **Prof. Tao Gui**, **Prof. Qi Zhang**, and **Prof. Xuanjing Huang**, and I expect to graduate in **2028**. I received my B.Eng. in Computer Science and Technology from **Tongji University**.
 
 The question I care about most is **scalable oversight**: *how do we ensure that the supervision signals we train models with stay faithful, robust, and scalable as model capability keeps growing?* My work approaches this through **reward modeling and RLHF** — from [Secrets of RLHF (Part I & II)](https://arxiv.org/abs/2401.06080) and [scaling human preference modeling](https://arxiv.org/abs/2505.10527), to [reward systems for coding agents](https://arxiv.org/abs/2606.26300) and aligning the *reasoning process* (not just the outcomes) of reward models.
 
@@ -56,7 +56,7 @@ I've been fortunate to work on these problems both in academia and industry — 
       <div class="tl-role">Combined Master–PhD (硕博连读), NLP Lab</div>
       <ul>
         <li>M.S. 2023 – 2025 · Ph.D. 2025 – 2028 (expected)</li>
-        <li>Co-advised by Prof. Xuanjing Huang and Prof. Tao Gui</li>
+        <li>Co-advised by Prof. Tao Gui, Prof. Qi Zhang, and Prof. Xuanjing Huang</li>
         <li>Research: scalable oversight, RLHF, reward modeling</li>
       </ul>
     </div>
