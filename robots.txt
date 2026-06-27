@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://refrain-wbh.github.io/sitemap.xml
