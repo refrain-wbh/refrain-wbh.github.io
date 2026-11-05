@@ -14,7 +14,7 @@ profile:
     <p><a href="mailto:wangbh25@m.fudan.edu.cn">wangbh25 [at] m.fudan.edu.cn</a></p>
 
 selected_papers: true # includes a list of papers marked as "selected={true}"
-social: false # social icons at the bottom of the page (disabled; use the Contact page)
+social: true # social icons at the bottom of the page (disabled; use the Contact page)
 
 announcements:
   enabled: false
