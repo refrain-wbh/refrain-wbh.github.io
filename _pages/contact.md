@@ -20,6 +20,11 @@ description: How to reach me.
     <span class="contact-label">Gmail</span>
     <span class="contact-value">refrain.wbh@gmail.com</span>
   </a>
+    <a class="contact-card" href="https://scholar.google.com/citations?user=SVq7jaEAAAAJ" target="_blank" rel="noopener">
+    <i class="ai ai-google-scholar"></i>
+    <span class="contact-label">Google Scholar</span>
+    <span class="contact-value">Binghai Wang</span>
+  </a>
 </div>
 
 {% include visitor-map.liquid %}
