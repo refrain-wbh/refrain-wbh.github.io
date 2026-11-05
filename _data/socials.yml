@@ -2,9 +2,9 @@
 # the socials will be displayed in the order they are defined here
 # for more information, please refer to the documentation of jekyll-socials plugin: https://github.com/george-gca/jekyll-socials
 # cv_pdf: /assets/pdf/cv.pdf # path to your CV PDF file (uncomment after adding the file)
-email: binghaiwang@example.edu # TODO: 改成你的真实邮箱
-github_username: refrain-wbh # your GitHub username
-# scholar_userid: # TODO: 填写你的 Google Scholar ID 后取消注释
+email: wangbh25@m.fudan.edu.cn
+github_username: refrain-wbh
+scholar_userid: SVq7jaEAAAAJ
 # semanticscholar_id: # TODO: 你的 Semantic Scholar ID
 # orcid_id: # TODO: 你的 ORCID
 # linkedin_username: # TODO
